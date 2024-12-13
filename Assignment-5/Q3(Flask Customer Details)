@@ -1,0 +1,291 @@
+3. Design a form that accepts customer details (CustName,email,MobNo,address ,pincode),on submit retrieve customer details in template which shows on web page in the table format by using flask request object and template. 
+
+ ( app.py  ,  templates > form.html,display.html  ,  static> style.css  )
+
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+@app.route('/', methods=['GET', 'POST'])
+
+def customer_form():
+
+    if request.method == 'POST':
+
+        cust_name = request.form['CustName']
+
+        email = request.form['email']
+
+        mob_no = request.form['MobNo']
+
+        address = request.form['address']
+
+        pincode = request.form['pincode']
+
+        
+
+        # Render the display template with customer details
+
+        return render_template('display.html', 
+
+                               cust_name=cust_name,
+
+                               email=email,
+
+                               mob_no=mob_no,
+
+                               address=address,
+
+                               pincode=pincode)   
+
+    return render_template('form.html')
+
+if __name__ == '__main__':
+
+    app.run(debug=True, port=5021)
+
+
+
+templates
+
+display.html
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Customer Details</title>
+
+</head>
+
+<body>
+
+    <h1>Customer Details</h1>
+
+    <table border="1">
+
+         <tr>
+
+            <th>Customer Name</th>
+
+            <th>Email</th>
+
+            <th>Mobile Number</th>
+
+            <th>Address</th>
+
+            <th>Pincode</th>
+
+        </tr>
+
+        <tr>
+
+            <td>{{ cust_name }}</td>
+
+            <td>{{ email }}</td>
+
+            <td>{{ mob_no }}</td>
+
+            <td>{{ address }}</td>
+
+            <td>{{ pincode }}</td>
+
+        </tr>
+
+    </table>
+
+    <br>
+
+    <a href="/">Go Back</a>
+
+</body>
+
+</html>
+
+
+
+form.html
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Customer Form</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Customer Details Form</h1>
+
+        <form id="customerForm" method="POST" onsubmit="return validateForm()">
+
+            <label for="CustName">Customer Name:</label><br>
+
+            <input type="text" id="CustName" name="CustName" required pattern="[A-Za-z\s]+" title="Please enter a valid name."><br><br>
+
+            <label for="email">Email:</label><br>
+
+            <input type="email" id="email" name="email" required title="Please enter a valid email address."><br><br>
+
+            <label for="MobNo">Mobile Number:</label><br>
+
+            <input type="text" id="MobNo" name="MobNo" required pattern="\d{10}" title="Please enter a 10-digit mobile number."><br><br>
+
+            <label for="address">Address:</label><br>
+
+            <input type="text" id="address" name="address" required title="Please enter your address."><br><br>
+
+            <label for="pincode">Pincode:</label><br>
+
+            <input type="text" id="pincode" name="pincode" required pattern="\d{6}" title="Please enter a 6-digit pincode."><br><br>
+
+            <input type="submit" value="Submit">
+
+        </form>
+
+    </div>
+
+    <script>
+
+        function validateForm() {
+
+            const form = document.getElementById('customerForm');
+
+            const mobNo = form['MobNo'].value;
+
+            const pincode = form['pincode'].value;
+
+            if (mobNo.length !== 10) {
+
+                alert("Mobile Number must be 10 digits long.");
+
+                return false;
+
+            }
+
+            if (pincode.length !== 6) {
+
+                alert("Pincode must be 6 digits long.");
+
+                return false;
+
+            }
+
+            return true;
+
+        }
+
+    </script>
+
+</body>
+
+</html>
+
+
+
+static
+
+style.css
+
+body {
+
+    font-family: Arial, sans-serif;
+
+    background-color: #f4f4f4;
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+.container {
+
+    max-width: 600px;
+
+    margin: 50px auto;
+
+    padding: 20px;
+
+    background: #fff;
+
+    border-radius: 8px;
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
+h1 {
+
+    text-align: center;
+
+    color: #333;
+
+}
+
+label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #555;
+
+}
+
+input[type="text"], input[type="email"] {
+
+    width: 100%;
+
+    padding: 10px;
+
+    margin: 5px 0 20px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 4px;
+
+    box-sizing: border-box;
+
+}
+
+input[type="submit"] {
+
+    background-color: #4CAF50;
+
+    color: white;
+
+    padding: 10px 15px;
+
+    border: none;
+
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    width: 100%;
+
+}
+
+input[type="submit"]:hover {
+
+    background-color: #45a049;
+
+}
