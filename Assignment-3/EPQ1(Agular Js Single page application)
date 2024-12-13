@@ -1,0 +1,202 @@
+3. Using AngularJS, create a single page application to display the student details who live in pune in tabular format.(Use appropriate angular directives.)
+
+
+
+app.component.ts
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+
+  selector: 'app-root',
+
+  templateUrl: './app.component.html',
+
+  styleUrls: ['./app.component.css']
+
+})
+
+export class AppComponent implements OnInit {
+
+  // Array to store student details
+
+  students = [
+
+    { name: 'John Doe', age: 22, location: 'Pune', course: 'Computer Science' },
+
+    { name: 'Jane Smith', age: 23, location: 'Mumbai', course: 'Electrical Engineering' },
+
+    { name: 'Tom Hanks', age: 21, location: 'Pune', course: 'Mechanical Engineering' },
+
+    { name: 'Alice Johnson', age: 20, location: 'Chennai', course: 'Mathematics' },
+
+    { name: 'Bob Brown', age: 24, location: 'Pune', course: 'Physics' },
+
+    { name: 'Charlie Davis', age: 22, location: 'Pune', course: 'Biology' }
+
+  ];
+
+  // Filtered students (those who live in Pune)
+
+  studentsInPune = [];
+
+  // Filter the students when the component is initialized
+
+  ngOnInit() {
+
+    this.filterStudentsInPune();
+
+  }
+
+  // Function to filter students living in Pune
+
+  filterStudentsInPune() {
+
+    this.studentsInPune = this.students.filter(student => student.location === 'Pune');
+
+  }
+
+}
+
+
+
+
+
+app.component.html
+
+<div class="container">
+
+  <h2>Student Details (Living in Pune)</h2>
+
+  <!-- Table to display student details -->
+
+  <table>
+
+    <thead>
+
+      <tr>
+
+        <th>Name</th>
+
+        <th>Age</th>
+
+        <th>Location</th>
+
+        <th>Course</th>
+
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      <!-- Loop through the filtered students who live in Pune -->
+
+      <tr *ngFor="let student of studentsInPune">
+
+        <td>{{ student.name }}</td>
+
+        <td>{{ student.age }}</td>
+
+        <td>{{ student.location }}</td>
+
+        <td>{{ student.course }}</td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
+
+
+
+
+
+app.component.css
+
+.container {
+
+  width: 70%;
+
+  margin: 20px auto;
+
+  font-family: Arial, sans-serif;
+
+}
+
+h2 {
+
+  text-align: center;
+
+}
+
+table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+  margin-top: 20px;
+
+}
+
+th, td {
+
+  padding: 10px;
+
+  border: 1px solid #ddd;
+
+  text-align: center;
+
+}
+
+th {
+
+  background-color: #f2f2f2;
+
+}
+
+tr:nth-child(even) {
+
+  background-color: #f9f9f9;
+
+}
+
+
+
+
+
+app.component.module
+
+import { NgModule } from '@angular/core';
+
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppComponent } from './app.component';
+
+@NgModule({
+
+  declarations: [
+
+    AppComponent
+
+  ],
+
+  imports: [
+
+    BrowserModule
+
+  ],
+
+  providers: [],
+
+  bootstrap: [AppComponent]
+
+})
+
+export class AppModule { }
+
+
+
