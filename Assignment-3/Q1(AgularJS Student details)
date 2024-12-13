@@ -1,0 +1,170 @@
+1. Design AngularJS application to display the details of 10 students stored in an array and show all details in table format using ng-for directive.
+
+
+
+app.component.ts
+
+import { Component } from '@angular/core';
+
+@Component({
+
+  selector: 'app-root',
+
+  templateUrl: './app.component.html',
+
+  styleUrls: ['./app.component.css']
+
+})
+
+export class AppComponent {
+
+  // Array containing the details of 10 students
+
+  students = [
+
+    { rollNo: 1, name: 'John Doe', age: 21, course: 'Computer Science' },
+
+    { rollNo: 2, name: 'Jane Smith', age: 22, course: 'Electrical Engineering' },
+
+    { rollNo: 3, name: 'Tom Hanks', age: 23, course: 'Mechanical Engineering' },
+
+    { rollNo: 4, name: 'Alice Johnson', age: 20, course: 'Mathematics' },
+
+    { rollNo: 5, name: 'Bob Brown', age: 22, course: 'Physics' },
+
+    { rollNo: 6, name: 'Charlie Davis', age: 21, course: 'Biology' },
+
+    { rollNo: 7, name: 'David Evans', age: 24, course: 'Business Administration' },
+
+    { rollNo: 8, name: 'Emily Wilson', age: 23, course: 'Chemistry' },
+
+    { rollNo: 9, name: 'Franklin Thomas', age: 22, course: 'Psychology' },
+
+    { rollNo: 10, name: 'Grace Moore', age: 21, course: 'English Literature' }
+
+  ];
+
+}
+
+
+
+app.component.html
+
+<div class="container">
+
+  <h2>Student Details</h2>
+
+  <table>
+
+    <thead>
+
+      <tr>
+
+        <th>Roll No</th>
+
+        <th>Name</th>
+
+        <th>Age</th>
+
+        <th>Course</th>
+
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      <!-- *ngFor directive to loop through the students array -->
+
+      <tr *ngFor="let student of students">
+
+        <td>{{ student.rollNo }}</td>
+
+        <td>{{ student.name }}</td>
+
+        <td>{{ student.age }}</td>
+
+        <td>{{ student.course }}</td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
+
+app.component.css
+
+.container {
+
+  width: 80%;
+
+  margin: 20px auto;
+
+}
+
+h2 {
+
+  text-align: center;
+
+}
+
+table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+}
+
+th, td {
+
+  border: 1px solid black;
+
+  padding: 10px;
+
+  text-align: center;
+
+}
+
+th {
+
+  background-color: #f2f2f2;
+
+}
+
+
+
+app.component.module
+
+import { NgModule } from '@angular/core';
+
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppComponent } from './app.component';
+
+@NgModule({
+
+  declarations: [
+
+    AppComponent
+
+  ],
+
+  imports: [
+
+    BrowserModule
+
+  ],
+
+  providers: [],
+
+  bootstrap: [AppComponent]
+
+})
+
+export class AppModule { }
+
+
+
