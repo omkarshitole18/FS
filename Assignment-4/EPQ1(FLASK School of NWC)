@@ -1,0 +1,44 @@
+4. Design flask application which display “Hello,Welcome to School of Computer science at NWC” message using template.
+
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+
+def home():
+
+    return render_template('hello.html', message="Hello, Welcome")
+
+if __name__ == '__main__':
+
+    app.run(debug=True, port=1123)
+
+
+
+templates
+
+hello.html
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Welcome Page</title>
+
+</head>
+
+<body>
+
+    <h1>{{ message }}</h1> 
+
+</body>
+
+</html>
+
