@@ -1,0 +1,248 @@
+4. Design login application with proper validations by using angularJS,on successful login display “Welcome” message.
+
+
+
+app.component.ts
+
+import { Component } from '@angular/core';
+
+@Component({
+
+  selector: 'app-root',
+
+  templateUrl: './app.component.html',
+
+  styleUrls: ['./app.component.css']
+
+})
+
+export class AppComponent {
+
+  // The user model that will hold the entered username and password
+
+  user = {
+
+    username: '',
+
+    password: ''
+
+  };
+
+  isLoggedIn = false;  // Flag to determine if user is logged in
+
+  // Function to handle login submission
+
+  submitLogin() {
+
+    // Basic validation for demo (you would replace this with real API authentication)
+
+    if (this.user.username === 'admin' && this.user.password === 'password') {
+
+      this.isLoggedIn = true;  // Set login flag to true
+
+    } else {
+
+      alert('Invalid credentials!');  // Show alert for incorrect credentials
+
+    }
+
+  }
+
+}
+
+
+
+
+
+app.component.html
+
+<div class="container">
+
+  <!-- Login Form -->
+
+  <h2>Login</h2>
+
+  <form #loginForm="ngForm" (ngSubmit)="submitLogin()" novalidate>
+
+    <div class="form-group">
+
+      <label for="username">Username:</label>
+
+      <input
+
+        type="text"
+
+        id="username"
+
+        name="username"
+
+        [(ngModel)]="user.username"
+
+        class="form-control"
+
+        required
+
+      />
+
+      <div class="error" *ngIf="loginForm.submitted && !user.username">
+
+        Username is required.
+
+      </div>
+
+    </div>
+
+    <div class="form-group">
+
+      <label for="password">Password:</label>
+
+      <input
+
+        type="password"
+
+        id="password"
+
+        name="password"
+
+        [(ngModel)]="user.password"
+
+        class="form-control"
+
+        required
+
+      />
+
+      <div class="error" *ngIf="loginForm.submitted && !user.password">
+
+        Password is required.
+
+      </div>
+
+    </div>
+
+    <div class="form-group">
+
+      <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">
+
+        Login
+
+      </button>
+
+    </div>
+
+  </form>
+
+
+
+  <!-- Success Message -->
+
+  <div *ngIf="isLoggedIn" class="success">
+
+    Welcome, {{ user.username }}!
+
+  </div>
+
+</div>
+
+
+
+
+
+app.component.css
+
+.container {
+
+  width: 300px;
+
+  margin: 50px auto;
+
+}
+
+h2 {
+
+  text-align: center;
+
+}
+
+.form-group {
+
+  margin-bottom: 15px;
+
+}
+
+input.form-control {
+
+  width: 100%;
+
+  padding: 8px;
+
+  margin: 5px 0;
+
+}
+
+button {
+
+  width: 100%;
+
+  padding: 10px;
+
+}
+
+.error {
+
+  color: red;
+
+  font-size: 12px;
+
+}
+
+.success {
+
+  color: green;
+
+  font-weight: bold;
+
+  text-align: center;
+
+  margin-top: 20px;
+
+}
+
+
+
+app.module.ts
+
+import { NgModule } from '@angular/core';
+
+import { BrowserModule } from '@angular/platform-browser';
+
+import { FormsModule } from '@angular/forms';  // Import FormsModule for two-way binding
+
+import { AppComponent } from './app.component';
+
+@NgModule({
+
+  declarations: [
+
+    AppComponent
+
+  ],
+
+  imports: [
+
+    BrowserModule,
+
+    FormsModule  // Add FormsModule to imports
+
+  ],
+
+  providers: [],
+
+  bootstrap: [AppComponent]
+
+})
+
+export class AppModule { }
+
+
+
