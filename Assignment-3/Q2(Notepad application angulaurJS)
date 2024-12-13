@@ -1,0 +1,246 @@
+2. Create a notepad application using AngularJS and show the current date and time of the system when a new note will be created.
+
+
+
+app.component.ts
+
+import { Component, OnInit } from '@angular/core';
+
+import { interval } from 'rxjs';  // Import the interval service
+
+@Component({
+
+  selector: 'app-root',
+
+  templateUrl: './app.component.html',
+
+  styleUrls: ['./app.component.css']
+
+})
+
+export class AppComponent implements OnInit {
+
+  currentTime: string = ''; // To store the current time
+
+  newNote = { title: '', content: '' }; // To bind input data
+
+  notes = []; // To store the list of notes
+
+  ngOnInit() {
+
+    // Start updating the time every second
+
+    interval(1000).subscribe(() => {
+
+      this.getCurrentTime();
+
+    });
+
+  }
+
+  // Function to get the current time and date
+
+  getCurrentTime() {
+
+    const now = new Date();
+
+    this.currentTime = now.toLocaleString();
+
+  }
+
+  // Function to add a new note
+
+  addNote() {
+
+    if (this.newNote.title && this.newNote.content) {
+
+      this.notes.push({
+
+        ...this.newNote,
+
+        createdAt: this.currentTime // Include the current time when the note is created
+
+      });
+
+      // Clear the input fields after adding the note
+
+      this.newNote.title = '';
+
+      this.newNote.content = '';
+
+    } else {
+
+      alert('Please fill in both the title and content.');
+
+    }
+
+  }
+
+}
+
+
+
+
+
+app.component.html
+
+<div class="container">
+
+  <h2>Notepad Application</h2>
+
+  <!-- Input fields for note -->
+
+  <input type="text" [(ngModel)]="newNote.title" placeholder="Note Title">
+
+  <textarea [(ngModel)]="newNote.content" rows="4" placeholder="Write your note here..."></textarea>
+
+  <button (click)="addNote()">Add Note</button>
+
+  <!-- Current Date and Time -->
+
+  <h3>Current Time: {{ currentTime }}</h3>
+
+  <!-- Displaying Notes -->
+
+  <div class="note-container">
+
+    <div class="note" *ngFor="let note of notes">
+
+      <h4>{{ note.title }}</h4>
+
+      <p>{{ note.content }}</p>
+
+      <div class="note-time">Created on: {{ note.createdAt }}</div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+app.component.css
+
+.container {
+
+  width: 60%;
+
+  margin: 20px auto;
+
+  font-family: Arial, sans-serif;
+
+}
+
+h2 {
+
+  text-align: center;
+
+}
+
+input[type="text"], textarea {
+
+  width: 100%;
+
+  padding: 10px;
+
+  margin: 10px 0;
+
+  border: 1px solid #ccc;
+
+  border-radius: 4px;
+
+}
+
+button {
+
+  padding: 10px 20px;
+
+  background-color: #4CAF50;
+
+  color: white;
+
+  font-size: 16px;
+
+  cursor: pointer;
+
+  border: none;
+
+  border-radius: 4px;
+
+}
+
+button:hover {
+
+  background-color: #45a049;
+
+}
+
+.note-container {
+
+  margin-top: 20px;
+
+}
+
+.note {
+
+  background-color: #f9f9f9;
+
+  padding: 10px;
+
+  margin-bottom: 10px;
+
+  border: 1px solid #ddd;
+
+  border-radius: 5px;
+
+}
+
+.note-time {
+
+  font-size: 12px;
+
+  color: gray;
+
+}
+
+
+
+
+
+app.component.module
+
+import { NgModule } from '@angular/core';
+
+import { BrowserModule } from '@angular/platform-browser';
+
+import { FormsModule } from '@angular/forms';  // Import FormsModule for two-way binding
+
+import { AppComponent } from './app.component';
+
+@NgModule({
+
+  declarations: [
+
+    AppComponent
+
+  ],
+
+  imports: [
+
+    BrowserModule,
+
+    FormsModule  // Include FormsModule to handle ngModel
+
+  ],
+
+  providers: [],
+
+  bootstrap: [AppComponent]
+
+})
+
+export class AppModule { }
+
