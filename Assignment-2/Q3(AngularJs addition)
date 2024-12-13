@@ -1,0 +1,132 @@
+3. Write an AngularJS script for addition of two numbers using ng-init, ng-model and ng-bind. And also demonstrate ng-show, ng-disabled, ng-click directives on button component.
+
+
+
+app.component.ts
+
+import { Component } from '@angular/core';
+
+@Component({
+
+  selector: 'app-root',
+
+  templateUrl: './app.component.html',
+
+  styleUrls: ['./app.component.css']
+
+})
+
+export class AppComponent {
+
+  title = 'NavedShaikh'; 
+
+  str = 'Welcome to School of Computer Science, NWC';
+
+  num1: number = 0;
+
+  num2: number = 0;
+
+  result: number = 0;
+
+  showButton: boolean = true;
+
+  isDisabled: boolean = false;
+
+  addNumbers() {
+
+    this.result = this.num1 + this.num2;
+
+    alert("Addition = "+this.result);
+
+    this.showButton = false;
+
+    this.isDisabled = true;
+
+  }
+
+}
+
+
+
+app.component.html
+
+<h1>{{str}}</h1>
+
+<div style="text-align:center">
+
+  <button (click)="showAlert()">Click Me!</button>
+
+</div>
+
+<div class="calculator-container">
+
+  <h1>Simple Calculator</h1>
+
+  <div class="input-group">
+
+    <label for="num1">First Number:</label>
+
+    <input id="num1" type="number" [(ngModel)]="num1" placeholder="Enter first number" />
+
+  </div>
+
+  <div class="input-group">
+
+    <label for="num2">Second Number:</label>
+
+    <input id="num2" type="number" [(ngModel)]="num2" placeholder="Enter second number" />
+
+  </div>
+
+  <button (click)="addNumbers()" [disabled]="isDisabled" [hidden]="!showButton" class="action-button">
+
+    Add Numbers
+
+  </button>
+
+  <p *ngIf="result !== null" class="result-text">Result: {{ result }}</p>
+
+</div>
+
+<router-outlet></router-outlet>
+
+
+
+app.module.ts
+
+import { NgModule } from '@angular/core';
+
+import { BrowserModule } from '@angular/platform-browser';
+
+import { FormsModule } from '@angular/forms';
+
+import { AppRoutingModule } from './app-routing.module';
+
+import { AppComponent } from './app.component';
+
+@NgModule({
+
+  declarations: [
+
+    AppComponent
+
+  ],
+
+  imports: [
+
+    BrowserModule,
+
+    AppRoutingModule,
+
+    FormsModule
+
+  ],
+
+  providers: [],
+
+  bootstrap: [AppComponent]
+
+})
+
+export class AppModule { }
+
