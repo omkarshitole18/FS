@@ -1,0 +1,15 @@
+1. Design angular JS application to display the message “Welcome to School of Computer Science, NWC”.
+
+
+
+app.component.html
+
+<h1>{{str}}</h1>
+
+<router-outlet></router-outlet>
+
+
+
+app.component.ts
+
+str="Welcome to School of Computer Science, MWC";
