@@ -1,0 +1,152 @@
+2. Design angular JS application by using ng-click Directive to display an alert message on button click.
+
+### *Step 1: Create an Angular Application*
+
+Run the following command to create a new Angular app:
+
+bash
+
+ng new clickAlertApp
+
+cd clickAlertApp
+
+
+
+### *Step 2: Code for Each File*
+
+1. **app.component.ts**
+
+   typescript
+
+   import { Component } from '@angular/core';
+
+   @Component({
+
+     selector: 'app-root',
+
+     templateUrl: './app.component.html',
+
+     styleUrls: ['./app.component.css']
+
+   })
+
+   export class AppComponent {
+
+     title = 'clickAlertApp';
+
+
+
+     showAlert(): void {
+
+       alert('Button clicked! This message is displayed using (click) in Angular.');
+
+     }
+
+   }
+
+2. **app.module.ts**
+
+   typescript
+
+   import { NgModule } from '@angular/core';
+
+   import { BrowserModule } from '@angular/platform-browser';
+
+   import { AppComponent } from './app.component';
+
+
+
+   @NgModule({
+
+     declarations: [
+
+       AppComponent
+
+     ],
+
+     imports: [
+
+       BrowserModule
+
+     ],
+
+     providers: [],
+
+     bootstrap: [AppComponent]
+
+   })
+
+   export class AppModule { }
+
+3. **app.component.html**
+
+   html
+
+   <div style="text-align:center">
+
+     <h1>Welcome to {{ title }}!</h1>
+
+     <button (click)="showAlert()">Click Me</button>
+
+   </div>
+
+   
+
+4. **app.component.css**
+
+   css
+
+   div {
+
+     margin-top: 50px;
+
+   }
+
+
+
+   button {
+
+     background-color: #007bff;
+
+     color: white;
+
+     padding: 10px 20px;
+
+     border: none;
+
+     border-radius: 5px;
+
+     font-size: 16px;
+
+     cursor: pointer;
+
+   }
+
+
+
+   button:hover {
+
+     background-color: #0056b3;
+
+   }
+
+  
+
+5. **main.ts**
+
+   No changes needed; this is auto-generated when you create the app.
+
+
+
+---
+
+
+
+### *Step 3: Run the Application*
+
+Run the following command to start the development server:
+
+bash
+
+ng serve
+
