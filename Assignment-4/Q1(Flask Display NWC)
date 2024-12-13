@@ -1,0 +1,74 @@
+1. Design simple web application using Flask to display the message “Welcome to Nowrosjee Wadia College Pune”.
+
+from flask import Flask
+
+app=Flask(__name__)
+
+@app.route('/')
+
+def NWC():
+
+    return "Welcome to Nowrosjee Wadia College Pune"
+
+if __name__=="__main__":
+
+    app.run(port=5006)
+
+==============================
+
+Create Python file (app.py):
+
+# Import Flask library
+
+from flask import Flask, render_template
+
+# Initialize Flask app
+
+app = Flask(__name__)
+
+# Define route for home page
+
+@app.route('/')
+
+def home():
+
+
+
+message = "Welcome to Nowrosjee Wadia College Pune"
+
+
+
+return render_template('index.html', message=message)
+
+
+
+if __name__ == "__main__":
+
+app.run(debug=True)
+
+Create HTML Template 
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Welcome Page</title>
+
+</head>
+
+<body>
+
+<h1>{{ message }}</h1> <!-- Step 6: Display message -->
+
+</body>
+
+</html>
+
