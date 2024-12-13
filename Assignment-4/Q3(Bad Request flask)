@@ -1,0 +1,38 @@
+3. Implement error status code to the abort() function for a bad request, so it raises a Bad Request Error and forbidden error using flask.
+from flask import Flask, abort, jsonify
+
+app = Flask(__name__)
+
+@app.route('/bad_request')
+def bad_request():
+    # Raising a Bad Request (400) error
+    abort(400, description="This is a bad request.")
+
+@app.route('/forbidden')
+def forbidden():
+    # Raising a Forbidden (403) error
+    abort(403, description="You are not allowed to access this resource.")
+
+# Custom error handlers for more detailed responses
+@app.errorhandler(400)
+def handle_bad_request(error):
+    response = {
+        "error": "Bad Request",
+        "message": error.description if error.description else "The request could not be understood."
+    }
+    return jsonify(response), 400
+
+@app.errorhandler(403)
+def handle_forbidden(error):
+    response = {
+        "error": "Forbidden",
+        "message": error.description if error.description else "You do not have permission to access this resource."
+    }
+    return jsonify(response), 403
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+
+
