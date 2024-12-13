@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bootstrap Alerts with OK Buttons</title>
+
+    <!-- Bootstrap CSS -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+
+        .alert {
+
+            display: none; /* Hide alerts initially */
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container mt-5">
+
+        <!-- Buttons to Show Alerts -->
+
+        <div class="mb-4">
+
+            <button class="btn btn-success" onclick="showAlert('success')">Show Success Alert</button>
+
+            <button class="btn btn-danger" onclick="showAlert('danger')">Show Danger Alert</button>
+
+            <button class="btn btn-warning" onclick="showAlert('warning')">Show Warning Alert</button>
+
+            <button class="btn btn-info" onclick="showAlert('info')">Show Info Alert</button>
+
+            <button class="btn btn-primary" onclick="showAlert('primary')">Show Primary Alert</button>
+
+        </div>
+
+        <!-- Success Alert -->
+
+        <div id="alert-success" class="alert alert-success" role="alert">
+
+            <span>This is a success alert—check it out!</span>
+
+            <button class="btn btn-sm btn-outline-success float-end" onclick="hideAlert('success')">OK</button>
+
+        </div>
+
+        <!-- Danger Alert -->
+
+        <div id="alert-danger" class="alert alert-danger" role="alert">
+
+            <span>This is a danger alert—be careful!</span>
+
+            <button class="btn btn-sm btn-outline-danger float-end" onclick="hideAlert('danger')">OK</button>
+
+        </div>
+
+        <!-- Warning Alert -->
+
+        <div id="alert-warning" class="alert alert-warning" role="alert">
+
+            <span>This is a warning alert—take caution!</span>
+
+            <button class="btn btn-sm btn-outline-warning float-end" onclick="hideAlert('warning')">OK</button>
+
+        </div>
+
+        <!-- Info Alert -->
+
+        <div id="alert-info" class="alert alert-info" role="alert">
+
+            <span>This is an info alert—here's some information.</span>
+
+            <button class="btn btn-sm btn-outline-info float-end" onclick="hideAlert('info')">OK</button>
+
+        </div>
+
+        <!-- Primary Alert -->
+
+        <div id="alert-primary" class="alert alert-primary" role="alert">
+
+            <span>This is a primary alert—check this out!</span>
+
+            <button class="btn btn-sm btn-outline-primary float-end" onclick="hideAlert('primary')">OK</button>
+
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS (Optional) -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    <script>
+
+        // Function to show the corresponding alert
+
+        function showAlert(type) {
+
+            // Hide all alerts first
+
+            document.querySelectorAll('.alert').forEach(alert => {
+
+                alert.style.display = 'none';
+
+            });
+
+            // Show the selected alert
+
+            document.getElementById('alert-' + type).style.display = 'block';
+
+        }
+
+        // Function to hide the corresponding alert
+
+        function hideAlert(type) {
+
+            document.getElementById('alert-' + type).style.display = 'none';
+
+        }
+
+    </script>
+
+</body>
+
+</html>
+
+
+
